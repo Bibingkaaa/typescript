@@ -74,7 +74,7 @@ const UseProps: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-slate-950 font-sans text-slate-100 relative overflow-hidden selection:bg-blue-500 selection:text-white">
-      {/* Background grid */}
+ 
       <div
         className="absolute inset-0 z-0 opacity-[0.15]"
         style={{
@@ -83,11 +83,11 @@ const UseProps: React.FC = () => {
           backgroundSize: '40px 40px',
         }}
       />
-      {/* Glow */}
+
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-96 bg-blue-600/20 blur-[120px] rounded-full pointer-events-none" />
-      {/* Hero + Product List */}
+
       <main className="relative z-10 pt-16 pb-24 flex flex-col items-center text-center px-4 w-full">
-        {/* Headline */}
+
         <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-white mb-6 leading-tight drop-shadow-sm">
           Advanced{' '}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-yellow-500">
@@ -96,12 +96,9 @@ const UseProps: React.FC = () => {
           Peripherals
         </h1>
 
-        {/* Subheadline */}
         <p className="text-slate-400 text-lg md:text-xl max-w-2xl mb-10 leading-relaxed">
           Explore a selection of high-quality gaming peripherals designed for reliable performance.
         </p>
-
-        {/* Product List (carousel) */}
         <section className="w-full">
           <div className="flex items-center justify-center gap-4 px-4 w-full">
             <button   aria-label="Previous"
