@@ -14,32 +14,57 @@ interface ProductCardProps {
 }
 
 const ProductCard = ({ product }: ProductCardProps) => {
-  const stars = Array.from({ length: 5 }, (_, i) => {
-    const pos = i + 1;
-    if (product.rating >= pos) return <FaStar key={i} />;
-    if (product.rating >= pos - 0.5) return <FaStarHalfAlt key={i} />;
-    return <FaRegStar key={i} />;
-  });
+
+  const renderStars = (rating: number) => {
+    const stars = [];
+    for (let i = 1; i <= 5; i++) {
+      if (rating >= i) {
+        stars.push(<FaStar key={i} className="text-yellow-400" />);
+      } else if (rating >= i - 0.5) {
+        stars.push(<FaStarHalfAlt key={i} className="text-yellow-400" />);
+      } else {
+        stars.push(<FaRegStar key={i} className="text-gray-300" />);
+      }
+    }
+    return stars;
+  };
 
   return (
-    <div className="card text-gray-300 w-full max-w-none mx-auto hover:brightness-90 transition-all cursor-pointer group bg-gradient-to-tl from-gray-900 to-gray-950 hover:from-gray-800 hover:to-gray-950 border-r-2 border-t-2 border-gray-900 rounded-lg overflow-hidden relative">
-      <div className="px-8 py-8 text-left">
+   <div className="w-full h-full rounded-lg bg-white shadow-[0px_0px_15px_rgba(0,0,0,0.09)] p-9 space-y-3 relative overflow-hidden group cursor-pointer hover:shadow-2xl transition-all duration-300">
+      
+      <div className="w-24 h-24 bg-violet-500 rounded-full absolute -right-5 -top-7 transition-transform group-hover:scale-110 duration-300">
+        <p className="absolute bottom-6 left-7 text-white text-2xl">0{product.productCode}</p>
+      </div>
+
+      <div className="relative z-10 pt-2">
+      
+        <h2 className="font-bold text-xl text-gray-800 truncate text-left">
+          {product.productName}
+        </h2>
         
-        <div className="uppercase font-bold text-xl truncate">{product.productName}</div>
-        <div className="text-gray-300 uppercase tracking-widest truncate">{product.productCode}</div>
-        <div className="mt-3 flex items-center gap-1 text-yellow-400">{stars}</div>
-        <div className="text-gray-400 mt-6">
-          <div className="flex items-center justify-between">
-            <p className="font-medium">Stock: {product.stock}</p>
-            <p className="font-bold">₱{product.price.toFixed(2)}</p>
+
+        <div className="text-sm text-zinc-500 space-y-2">
+          
+     
+          <div className="flex items-center gap-1">
+             {renderStars(product.rating)}
+             <span className="text-xs ml-1 text-gray-400">({product.rating})</span>
           </div>
-          <p className={product.isAvailable ? "text-green-500" : "text-red-500"}>
-            {product.isAvailable ? "Available" : "Out of Stock"}
-          </p>
+        
+          <div className="flex justify-between items-end border-t border-gray-100 pt-2 mt-2">
+      
+             <div className="flex flex-col">
+                <span className="text-xs font-medium text-gray-400">Stock: {product.stock}</span>
+                <span className={`text-xs font-bold ${product.isAvailable ? "text-emerald-500" : "text-rose-500"}`}>
+                   {product.isAvailable ? "Available" : "Out of Stock"}
+                </span>
+             </div>
+             <p className="font-bold text-lg text-violet-600">
+               ₱{product.price.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+             </p>
+          </div>
         </div>
       </div>
-      <div className="h-2 w-full bg-gradient-to-l via-yellow-500 group-hover:blur-xl blur-2xl m-auto rounded transition-all absolute bottom-0" />
-      <div className="h-0.5 group-hover:w-full bg-gradient-to-l via-yellow-950 group-hover:via-yellow-500 w-[70%] m-auto rounded transition-all" />
     </div>
   );
 };

@@ -88,32 +88,57 @@ interface ProductCardProps {
 }
 
 const ProductCard = ({ product }: ProductCardProps) => {
-  const stars = Array.from({ length: 5 }, (_, i) => {
-    const pos = i + 1;
-    if (product.rating >= pos) return <FaStar key={i} />;
-    if (product.rating >= pos - 0.5) return <FaStarHalfAlt key={i} />;
-    return <FaRegStar key={i} />;
-  });
+
+  const renderStars = (rating: number) => {
+    const stars = [];
+    for (let i = 1; i <= 5; i++) {
+      if (rating >= i) {
+        stars.push(<FaStar key={i} className="text-yellow-400" />);
+      } else if (rating >= i - 0.5) {
+        stars.push(<FaStarHalfAlt key={i} className="text-yellow-400" />);
+      } else {
+        stars.push(<FaRegStar key={i} className="text-gray-300" />);
+      }
+    }
+    return stars;
+  };
 
   return (
-    <div className="card text-gray-300 w-full max-w-none mx-auto hover:brightness-90 transition-all cursor-pointer group bg-gradient-to-tl from-gray-900 to-gray-950 hover:from-gray-800 hover:to-gray-950 border-r-2 border-t-2 border-gray-900 rounded-lg overflow-hidden relative">
-      <div className="px-8 py-8 text-left">
+   <div className="w-full h-full rounded-lg bg-white shadow-[0px_0px_15px_rgba(0,0,0,0.09)] p-9 space-y-3 relative overflow-hidden group cursor-pointer hover:shadow-2xl transition-all duration-300">
+      
+      <div className="w-24 h-24 bg-violet-500 rounded-full absolute -right-5 -top-7 transition-transform group-hover:scale-110 duration-300">
+        <p className="absolute bottom-6 left-7 text-white text-2xl">0{product.productCode}</p>
+      </div>
+
+      <div className="relative z-10 pt-2">
+      
+        <h2 className="font-bold text-xl text-gray-800 truncate text-left">
+          {product.productName}
+        </h2>
         
-        <div className="uppercase font-bold text-xl truncate">{product.productName}</div>
-        <div className="text-gray-300 uppercase tracking-widest truncate">{product.productCode}</div>
-        <div className="mt-3 flex items-center gap-1 text-yellow-400">{stars}</div>
-        <div className="text-gray-400 mt-6">
-          <div className="flex items-center justify-between">
-            <p className="font-medium">Stock: {product.stock}</p>
-            <p className="font-bold">₱{product.price.toFixed(2)}</p>
+
+        <div className="text-sm text-zinc-500 space-y-2">
+          
+     
+          <div className="flex items-center gap-1">
+             {renderStars(product.rating)}
+             <span className="text-xs ml-1 text-gray-400">({product.rating})</span>
           </div>
-          <p className={product.isAvailable ? "text-green-500" : "text-red-500"}>
-            {product.isAvailable ? "Available" : "Out of Stock"}
-          </p>
+        
+          <div className="flex justify-between items-end border-t border-gray-100 pt-2 mt-2">
+      
+             <div className="flex flex-col">
+                <span className="text-xs font-medium text-gray-400">Stock: {product.stock}</span>
+                <span className={`text-xs font-bold ${product.isAvailable ? "text-emerald-500" : "text-rose-500"}`}>
+                   {product.isAvailable ? "Available" : "Out of Stock"}
+                </span>
+             </div>
+             <p className="font-bold text-lg text-violet-600">
+               ₱{product.price.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+             </p>
+          </div>
         </div>
       </div>
-      <div className="h-2 w-full bg-gradient-to-l via-yellow-500 group-hover:blur-xl blur-2xl m-auto rounded transition-all absolute bottom-0" />
-      <div className="h-0.5 group-hover:w-full bg-gradient-to-l via-yellow-950 group-hover:via-yellow-500 w-[70%] m-auto rounded transition-all" />
     </div>
   );
 };
@@ -153,12 +178,11 @@ Installed react-icons for arrow buttons
 
 ```tsx
 import ProductCard, { type Product } from './ProductCard';
-import React, { useRef } from 'react';
-import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
+import React from 'react';
 
 const products: Product[] = [
     {
-        productCode: "PRD120",
+        productCode: "1",
         productName: "Wireless Mouse",
         stock: 25,
         price: 799.99,
@@ -166,7 +190,7 @@ const products: Product[] = [
         isAvailable: true
     },
     {
-        productCode: "PRD121",
+        productCode: "2",
         productName: "Keyboard",
         stock: 0,
         price: 1800.00,
@@ -174,7 +198,7 @@ const products: Product[] = [
         isAvailable: false
     },
     {
-        productCode: "PRD122",
+        productCode: "3",
         productName: "USB-C Hub",
         stock: 0,
         price: 1499.00,
@@ -182,7 +206,7 @@ const products: Product[] = [
         isAvailable: false
     },
     {
-        productCode: "PRD123",
+        productCode: "4",
         productName: "Gaming Headset",
         stock: 18,
         price: 1999.00,
@@ -190,7 +214,7 @@ const products: Product[] = [
         isAvailable: true
     },
       {
-        productCode: "PRD124",
+        productCode: "5",
         productName: "Webcam HD",
         stock: 7,
         price: 1799.00,
@@ -198,7 +222,7 @@ const products: Product[] = [
         isAvailable: true
     },
         {
-        productCode: "PRD125",
+        productCode: "6",
         productName: "Gaming Monitor",
         stock: 9,
         price: 5799.00,
@@ -208,51 +232,31 @@ const products: Product[] = [
 ];
 
 const UseProps: React.FC = () => {
-  const trackRef = useRef<HTMLDivElement>(null);
-
-  const scrollBySlide = (direction: 'left' | 'right') => {
-    const track = trackRef.current;
-    if (!track) return;
-    const firstSlide = track.querySelector<HTMLDivElement>('.carousel-slide');
-    const slideWidth = firstSlide ? firstSlide.offsetWidth : 360;
-    const gap = 16; // matches gap-4
-    const delta = (direction === 'right' ? 1 : -1) * (slideWidth + gap);
-    track.scrollBy({ left: delta, behavior: 'smooth' });
-  };
-
   return (
-    <div className="min-h-screen bg-white font-sans text-slate-100 relative overflow-hidden selection:bg-blue-500 selection:text-white">
- 
+    <div className="min-h-screen font-sans text-slate-800 relative selection:bg-violet-500 selection:text-white pb-20">
+      
+      <main className="relative z-10 pt-10 flex flex-col items-center px-4 w-full">
+        
+        <div className="mb-10 text-center">
+          
+          <h1 className="text-3xl font-extrabold tracking-tight text-slate-900 mb-4">
+            Welcome to <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-violet-500">Product</span> Gallery
+          </h1>
+          <p className="text-slate-500 text-lg max-w-xl mx-auto">
+            Prepared by: Mary Hannah Caryl D. Reyes
+          </p>
+    
+        </div>
 
-     
-      <main className="relative z-10 pt-16 pb-24 flex flex-col items-center text-center px-4 w-full">
-
-        <section className="w-full">
-          <div className="flex items-center justify-center gap-4 px-4 w-full">
-            <button   aria-label="Previous"
-              onClick={() => scrollBySlide('left')}
-              className="flex items-center justify-center w-12 h-12 bg-blue-900 text-white rounded-full hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50 shadow-lg transition-all duration-200">
-            <FaArrowLeft className="w-5 h-5" />
-            </button>
-            <div
-              ref={trackRef}
-              className="w-full overflow-x-auto no-scrollbar snap-x snap-mandatory scroll-smooth"
-            >
-              <div className="flex gap-4 w-max mx-auto">
-                {products.map((product) => (
-                  <div key={product.productCode} className="carousel-slide snap-start shrink-0 w-[360px]">
-                    <ProductCard product={product} />
-                  </div>
-                ))}
+        <section className="w-full max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
+            
+            {products.map((product) => (
+              <div key={product.productCode} className="w-full max-w-[380px]"> 
+                <ProductCard product={product} />
               </div>
-            </div>
+            ))}
 
-            <button
-              aria-label="Next"
-              onClick={() => scrollBySlide('right')}
-             className="flex items-center justify-center w-12 h-12 bg-blue-900 text-white rounded-full hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50 shadow-lg transition-all duration-200">
-                <FaArrowRight className="w-7 h-7" />
-            </button>
           </div>
         </section>
       </main>
