@@ -52,7 +52,7 @@ const products: Product[] = [
     }
 ];
 
-const UseProps: React.FC = () => {
+const ProductList: React.FC = () => {
   return (
     <div className="min-h-screen font-sans text-slate-800 relative selection:bg-violet-500 selection:text-white pb-20">
       
@@ -85,4 +85,4 @@ const UseProps: React.FC = () => {
   );
 };
 
-export default UseProps;
+export default ProductList;

@@ -20,7 +20,7 @@ export const MainPageLayout = () => {
         <div className="hidden md:flex items-center gap-8 font-medium text-slate-600 text-sm">
           <Link to="/section-one" className="text-slate-900 font-semibold">Agenda 1</Link>
           <Link to="/section-two" className="hover:text-blue-600 transition">Agenda 2</Link>
-          <Link to="/settings" className="hover:text-blue-600 transition">Agenda 3</Link>
+          <Link to="/section-three" className="hover:text-blue-600 transition">Agenda 3</Link>
         </div>
 
         <button className="md:hidden text-slate-900"><Menu className="w-6 h-6" /></button>
