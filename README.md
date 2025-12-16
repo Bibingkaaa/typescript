@@ -32,7 +32,7 @@ I used tailwind ui libraries through https://uiverse.io/
 
 For product card:
 
-[Card by carlosepcc made with Tailwind | Uiverse.io](https://uiverse.io/carlosepcc/dangerous-penguin-84)
+[Card by jubayer-10 made with Tailwind | Uiverse.io](https://uiverse.io/jubayer-10/white-catfish-8)
 
 ---
 
@@ -149,23 +149,39 @@ export default ProductCard;
 This part is for passing all data to another component:
 
 ```jsx
- <div className="bg-orange-500 w-7 h-7 rounded-full rounded-tl-none mb-4 group-hover:-translate-y-1 group-hover:shadow-xl group-hover:shadow-red-900 transition-all" />
-            <img
-              src={product.imageUrl}
-              alt={product.productName}
-              className="w-full h-48 object-cover rounded-t-lg transition-transform duration-300 ease-out group-hover:scale-[1.02] group-hover:drop-shadow-[0_0_24px_rgba(234,179,8,0.2)]"
-            />
-        <div className="uppercase font-bold text-xl truncate">{product.productName}</div>
-        <div className="text-gray-300 uppercase tracking-widest truncate">{product.productCode}</div>
-        <div className="mt-3 flex items-center gap-1 text-yellow-400">{stars}</div>
-        <div className="text-gray-400 mt-6">
-          <div className="flex items-center justify-between">
-            <p className="font-medium">Stock: {product.stock}</p>
-            <p className="font-bold">₱{product.price.toFixed(2)}</p>
+ <div className="w-24 h-24 bg-violet-500 rounded-full absolute -right-5 -top-7 transition-transform group-hover:scale-110 duration-300">
+        <p className="absolute bottom-6 left-7 text-white text-2xl">0{product.productCode}</p>
+      </div>
+
+      <div className="relative z-10 pt-2">
+      
+        <h2 className="font-bold text-xl text-gray-800 truncate text-left">
+          {product.productName}
+        </h2>
+        
+
+        <div className="text-sm text-zinc-500 space-y-2">
+          
+     
+          <div className="flex items-center gap-1">
+             {renderStars(product.rating)}
+             <span className="text-xs ml-1 text-gray-400">({product.rating})</span>
           </div>
-          <p className={product.isAvailable ? "text-green-500" : "text-red-500"}>
-            {product.isAvailable ? "Available" : "Out of Stock"}
-          </p>
+        
+          <div className="flex justify-between items-end border-t border-gray-100 pt-2 mt-2">
+      
+             <div className="flex flex-col">
+                <span className="text-xs font-medium text-gray-400">Stock: {product.stock}</span>
+                <span className={`text-xs font-bold ${product.isAvailable ? "text-emerald-500" : "text-rose-500"}`}>
+                   {product.isAvailable ? "Available" : "Out of Stock"}
+                </span>
+             </div>
+             <p className="font-bold text-lg text-violet-600">
+               ₱{product.price.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+             </p>
+          </div>
+        </div>
+      </div>
 ```
 
 ---
