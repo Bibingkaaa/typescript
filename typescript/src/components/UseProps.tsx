@@ -73,7 +73,7 @@ const UseProps: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black font-sans text-slate-100 relative overflow-hidden selection:bg-blue-500 selection:text-white">
+    <div className="min-h-screen bg-white font-sans text-slate-100 relative overflow-hidden selection:bg-blue-500 selection:text-white">
  
 
      
