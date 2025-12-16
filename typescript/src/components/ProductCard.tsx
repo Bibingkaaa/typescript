@@ -1,7 +1,6 @@
 import { FaStar, FaRegStar, FaStarHalfAlt } from "react-icons/fa";
 
 export interface Product {
-  imageUrl: string;
   productCode: string; //char
   productName: string; //varchar
   stock: number; // integer

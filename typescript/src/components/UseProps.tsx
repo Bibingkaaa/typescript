@@ -4,7 +4,6 @@ import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 
 const products: Product[] = [
     {
-        imageUrl: "/2.png",
         productCode: "PRD120",
         productName: "Wireless Mouse",
         stock: 25,
@@ -13,7 +12,6 @@ const products: Product[] = [
         isAvailable: true
     },
     {
-        imageUrl: "/1.png",
         productCode: "PRD121",
         productName: "Keyboard",
         stock: 0,
@@ -22,7 +20,6 @@ const products: Product[] = [
         isAvailable: false
     },
     {
-        imageUrl: "/3.png",
         productCode: "PRD122",
         productName: "USB-C Hub",
         stock: 0,
@@ -31,7 +28,6 @@ const products: Product[] = [
         isAvailable: false
     },
     {
-        imageUrl: "/5.png",
         productCode: "PRD123",
         productName: "Gaming Headset",
         stock: 18,
@@ -40,7 +36,6 @@ const products: Product[] = [
         isAvailable: true
     },
       {
-        imageUrl: "/4.png",
         productCode: "PRD124",
         productName: "Webcam HD",
         stock: 7,
@@ -49,7 +44,6 @@ const products: Product[] = [
         isAvailable: true
     },
         {
-        imageUrl: "/6.png",
         productCode: "PRD125",
         productName: "Gaming Monitor",
         stock: 9,
