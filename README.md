@@ -283,29 +283,20 @@ const UseProps: React.FC = () => {
 export default UseProps;
 ```
 
-This one is used for horizontal carousel
 
-```jsx
-  const trackRef = useRef<HTMLDivElement>(null);
-
-  const scrollBySlide = (direction: 'left' | 'right') => {
-    const track = trackRef.current;
-    if (!track) return;
-    const firstSlide = track.querySelector<HTMLDivElement>('.carousel-slide');
-    const slideWidth = firstSlide ? firstSlide.offsetWidth : 360;
-    const gap = 16; // matches gap-4
-    const delta = (direction === 'right' ? 1 : -1) * (slideWidth + gap);
-    track.scrollBy({ left: delta, behavior: 'smooth' });
-  };
-```
 
 And this part is for the rendered data coming from the child component
 
 ```jsx
-<div className="flex gap-4 w-max mx-auto">
-                {products.map((product) => (
-                  <div key={product.productCode} className="carousel-slide snap-start shrink-0 w-[360px]">
-                    <ProductCard product={product} />
-                  </div>
-                ))}
+<section className="w-full max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
+            
+            {products.map((product) => (
+              <div key={product.productCode} className="w-full max-w-[380px]"> 
+                <ProductCard product={product} />
+              </div>
+            ))}
+
+          </div>
+        </section>
 ```
