@@ -3,6 +3,7 @@ import React from 'react';
 
 const products: Product[] = [
     {
+      imageUrl: "/2.png",
         productCode: "1",
         productName: "Wireless Mouse",
         stock: 25,
@@ -11,6 +12,7 @@ const products: Product[] = [
         isAvailable: true
     },
     {
+       imageUrl: "/1.png",
         productCode: "2",
         productName: "Keyboard",
         stock: 0,
@@ -19,6 +21,7 @@ const products: Product[] = [
         isAvailable: false
     },
     {
+      imageUrl: "/3.png",
         productCode: "3",
         productName: "USB-C Hub",
         stock: 0,
@@ -27,6 +30,7 @@ const products: Product[] = [
         isAvailable: false
     },
     {
+      imageUrl: "/5.png",
         productCode: "4",
         productName: "Gaming Headset",
         stock: 18,
@@ -35,6 +39,7 @@ const products: Product[] = [
         isAvailable: true
     },
       {
+        imageUrl: "/4.png",
         productCode: "5",
         productName: "Webcam HD",
         stock: 7,
@@ -43,6 +48,7 @@ const products: Product[] = [
         isAvailable: true
     },
         {
+        imageUrl: "/6.png",
         productCode: "6",
         productName: "Gaming Monitor",
         stock: 9,
@@ -56,7 +62,7 @@ const ProductList: React.FC = () => {
   return (
     <div className="min-h-screen font-sans text-slate-800 relative selection:bg-violet-500 selection:text-white pb-20">
       
-      <main className="relative z-10 pt-10 flex flex-col items-center px-4 w-full">
+      <main className="relative z-10 pt-1 flex flex-col items-center px-4 w-full">
         
         <div className="mb-10 text-center">
           

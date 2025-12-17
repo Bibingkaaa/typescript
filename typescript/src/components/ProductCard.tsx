@@ -1,6 +1,7 @@
 import { FaStar, FaRegStar, FaStarHalfAlt } from "react-icons/fa";
 
 export interface Product {
+  imageUrl: string;
   productCode: string; //char
   productName: string; //varchar
   stock: number; // integer
@@ -32,17 +33,22 @@ const ProductCard = ({ product }: ProductCardProps) => {
   return (
    <div className="w-full h-full rounded-lg bg-white shadow-[0px_0px_15px_rgba(0,0,0,0.09)] p-9 space-y-3 relative overflow-hidden group cursor-pointer hover:shadow-2xl transition-all duration-300">
       
-      <div className="w-24 h-24 bg-violet-500 rounded-full absolute -right-5 -top-7 transition-transform group-hover:scale-110 duration-300">
+      <div className="w-24 h-24 bg-violet-500 rounded-full absolute -right-5 -top-7 transition-transform group-hover:scale-110 duration-300 z-20">
         <p className="absolute bottom-6 left-7 text-white text-2xl">0{product.productCode}</p>
       </div>
-
-      <div className="relative z-10 pt-2">
       
+      <div className="relative z-10 pt-2">
+         <div className="w-full h-48 bg-gray-50 rounded-xl mb-4 overflow-hidden relative shadow-inner">
+          <img 
+            src={product.imageUrl} 
+            alt={product.productName}
+            className="w-full h-full object-contain mix-blend-multiply hover:scale-110 transition-transform duration-500"
+          /></div>
         <h2 className="font-bold text-xl text-gray-800 truncate text-left">
           {product.productName}
         </h2>
-        
-
+      
+      
         <div className="text-sm text-zinc-500 space-y-2">
           
      
